@@ -1069,9 +1069,9 @@ const AdminDashboard = () => {
                         <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-md border border-white/10 group cursor-pointer hover:bg-white/20 transition-all duration-500">
                             <span className="text-2xl group-hover:rotate-12 transition-transform">🛰️</span>
                         </div>
-                        <h2 className="text-2xl font-black text-white tracking-tighter italic">SG<span className="text-emerald-400">MS</span></h2>
+                        <h2 className="text-2xl font-black text-white tracking-tighter italic">Smart<span className="text-emerald-400">bin</span></h2>
                     </div>
-                    <p className="text-[10px] text-indigo-300 font-bold uppercase tracking-[0.3em] ml-1 opacity-60">Smart Garbage Management System</p>
+                    <p className="text-[10px] text-indigo-300 font-bold uppercase tracking-[0.3em] ml-1 opacity-60">Garbage Management System</p>
                 </div>
 
                 <nav className="mt-6 px-6 space-y-2 flex-1 overflow-y-auto custom-scrollbar pb-32">
