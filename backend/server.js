@@ -106,8 +106,14 @@ io.on('connection', (socket) => {
 app.set('socketio', io);
 
 // Routes Placeholder
-app.get('/', (req, res) => {
-    res.send('API is running...');
+// Health Check Route
+app.get("/", (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Smart Garbage Management Backend is Running 🚀",
+        environment: process.env.NODE_ENV,
+        timestamp: new Date()
+    });
 });
 
 // Error Handling Middleware
