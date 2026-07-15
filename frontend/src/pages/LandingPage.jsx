@@ -34,8 +34,8 @@ const LandingPage = () => {
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-white text-xl shadow-lg shadow-emerald-200">🍃</div>
                     <div className="flex flex-col">
-                        <h1 className="text-xl font-black text-emerald-600 tracking-tighter leading-none">SMART GARBAGE</h1>
-                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Management</p>
+                        <h1 className="text-xl font-black text-emerald-600 tracking-tighter leading-none">SGMS</h1>
+                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-0.5">Smart Garbage Management System</p>
                     </div>
                 </div>
                 <div className="hidden md:flex items-center gap-8">
@@ -184,7 +184,7 @@ const LandingPage = () => {
                     <div className="col-span-1 md:col-span-1">
                         <div className="flex items-center gap-3 mb-8">
                             <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-white text-xl">🍃</div>
-                            <h4 className="text-2xl font-black tracking-tighter italic">Smart Garbage System</h4>
+                            <h4 className="text-2xl font-black tracking-tighter italic">SGMS</h4>
                         </div>
                         <p className="text-gray-500 font-medium leading-relaxed">
                             Revolutionizing urban waste management with real-time tracking.<br />
@@ -196,9 +196,9 @@ const LandingPage = () => {
                     <div className="md:col-start-4">
                         <h5 className="font-black mb-8 uppercase tracking-widest text-[10px] text-emerald-500">Contact Us</h5>
                         <p className="text-gray-400 font-bold text-sm leading-relaxed">
-                            Smart BIN muncipality, Global village<br />
+                            SGMS Municipality, Global village<br />
                             Kengeri, RR nagar<br />
-                            support@smartbin.com
+                            support@sgms.com
                         </p>
                     </div>
                 </div>
