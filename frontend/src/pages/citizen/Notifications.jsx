@@ -12,7 +12,7 @@ const Notifications = () => {
     useEffect(() => {
         fetchNotifications();
 
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_API_URL);
 
         // Join user's personal room for targeted notifications
         if (user?._id) {
@@ -39,7 +39,7 @@ const Notifications = () => {
 
     const fetchNotifications = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/notifications', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notifications`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -53,7 +53,7 @@ const Notifications = () => {
 
     const markAsRead = async (id) => {
         try {
-            await fetch(`http://localhost:5000/api/notifications/${id}/read`, {
+            await fetch(`${import.meta.env.VITE_API_URL}/api/notifications/${id}/read`, {
                 method: 'PUT',
                 headers: { Authorization: `Bearer ${user.token}` }
             });

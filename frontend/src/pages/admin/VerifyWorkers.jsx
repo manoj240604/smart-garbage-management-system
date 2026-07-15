@@ -12,7 +12,7 @@ const VerifyWorkers = () => {
 
     const fetchWorkers = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/workers/verification-candidates', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/workers/verification-candidates`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -30,7 +30,7 @@ const VerifyWorkers = () => {
         if (!window.confirm(`Are you sure you want to ${status} this worker?`)) return;
 
         try {
-            const res = await fetch(`http://localhost:5000/api/auth/verify-worker/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/verify-worker/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ const VerifyWorkers = () => {
                             </td>
                             <td className="px-8 py-6">
                                 {worker.dlPhoto ? (
-                                    <a href={`http://localhost:5000${worker.dlPhoto}`} target="_blank" rel="noopener noreferrer" className="text-[10px] font-black text-indigo-600 uppercase tracking-widest hover:underline flex items-center gap-1">
+                                    <a href={`${import.meta.env.VITE_API_URL}${worker.dlPhoto}`} target="_blank" rel="noopener noreferrer" className="text-[10px] font-black text-indigo-600 uppercase tracking-widest hover:underline flex items-center gap-1">
                                         View Photo <span className="text-lg leading-none">↗</span>
                                     </a>
                                 ) : (

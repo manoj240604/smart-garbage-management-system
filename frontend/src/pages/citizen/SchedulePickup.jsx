@@ -32,7 +32,7 @@ const SchedulePickup = () => {
 
     const fetchAreas = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/areas', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/areas`, {
                 headers: { Authorization: `Bearer ${user?.token}` }
             });
             const data = await res.json();
@@ -71,7 +71,7 @@ const SchedulePickup = () => {
         }
 
         try {
-            const res = await fetch('http://localhost:5000/api/pickup-requests', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests`, {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${user.token}` },
                 body: data

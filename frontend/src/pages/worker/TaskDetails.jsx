@@ -15,7 +15,7 @@ const WorkerTaskDetails = () => {
 
     const fetchTask = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/pickup-requests/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/${id}`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -29,7 +29,7 @@ const WorkerTaskDetails = () => {
 
     const handleUpdateStatus = async (newStatus) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/pickup-requests/${id}/status`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/${id}/status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

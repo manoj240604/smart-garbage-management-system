@@ -14,7 +14,7 @@ const WorkHistory = () => {
 
     const fetchHistory = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/workers/work-history', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/workers/work-history`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();

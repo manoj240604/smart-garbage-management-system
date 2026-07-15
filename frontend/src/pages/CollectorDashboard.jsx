@@ -11,7 +11,7 @@ const CollectorDashboard = () => {
             try {
                 // If user has assignedArea, fetch bins for that area
                 if (user.assignedArea) {
-                    const res = await fetch(`http://localhost:5000/api/areas/${user.assignedArea}/bins`, {
+                    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/areas/${user.assignedArea}/bins`, {
                         headers: { Authorization: `Bearer ${user.token}` }
                     });
                     const data = await res.json();
@@ -24,7 +24,7 @@ const CollectorDashboard = () => {
 
         if (user) fetchBins();
 
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_API_URL);
         socket.on('binUpdate', (updatedBin) => {
             setBins(prevBins => prevBins.map(b => b._id === updatedBin._id ? updatedBin : b));
         });
@@ -34,7 +34,7 @@ const CollectorDashboard = () => {
 
     const collectGarbage = async (binId) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/bins/${binId}/collect`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/bins/${binId}/collect`, {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${user.token}`,

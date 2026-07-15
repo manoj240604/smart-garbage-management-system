@@ -19,10 +19,10 @@ const ZoneManagement = () => {
     const fetchData = async () => {
         try {
             const [areasRes, workersRes] = await Promise.all([
-                fetch('http://localhost:5000/api/areas', {
+                fetch(`${import.meta.env.VITE_API_URL}/api/areas`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                fetch('http://localhost:5000/api/workers', {
+                fetch(`${import.meta.env.VITE_API_URL}/api/workers`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 })
             ]);
@@ -40,8 +40,8 @@ const ZoneManagement = () => {
     const handleSaveArea = async (e) => {
         e.preventDefault();
         const url = editingArea
-            ? `http://localhost:5000/api/areas/${editingArea._id}`
-            : 'http://localhost:5000/api/areas';
+            ? `${import.meta.env.VITE_API_URL}/api/areas/${editingArea._id}`
+            : `${import.meta.env.VITE_API_URL}/api/areas`;
         const method = editingArea ? 'PUT' : 'POST';
 
         try {
@@ -74,7 +74,7 @@ const ZoneManagement = () => {
     const handleDeleteArea = async (id) => {
         if (!window.confirm('Are you sure you want to delete this area?')) return;
         try {
-            const res = await fetch(`http://localhost:5000/api/areas/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/areas/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${user.token}` }
             });
@@ -100,7 +100,7 @@ const ZoneManagement = () => {
 
     const handleAssignWorkers = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/areas/${showAssignModal}/workers`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/areas/${showAssignModal}/workers`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -15,7 +15,7 @@ const CitizenHome = () => {
 
     const fetchStats = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/pickup-requests/my-requests', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/my-requests`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();

@@ -14,7 +14,7 @@ const WorkerDashboard = () => {
     useEffect(() => {
         const syncStatus = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/auth/profile', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/profile`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 if (res.ok) {
@@ -30,7 +30,7 @@ const WorkerDashboard = () => {
         syncStatus();
         fetchWorkerData();
 
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_API_URL);
         if (user?._id) {
             socket.emit('joinPresence', user._id, user.role);
         }
@@ -79,10 +79,10 @@ const WorkerDashboard = () => {
     const fetchWorkerData = async () => {
         try {
             const [tasksRes, historyRes] = await Promise.all([
-                fetch('http://localhost:5000/api/workers/my-tasks', {
+                fetch(`${import.meta.env.VITE_API_URL}/api/workers/my-tasks`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                fetch('http://localhost:5000/api/workers/work-history', {
+                fetch(`${import.meta.env.VITE_API_URL}/api/workers/work-history`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 })
             ]);
@@ -101,7 +101,7 @@ const WorkerDashboard = () => {
 
     const handleUpdateStatus = async (taskId, newStatus) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/pickup-requests/${taskId}/status`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/${taskId}/status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const WorkerDashboard = () => {
     const toggleAvailability = async () => {
         const nextStatus = availability ? 'offline' : 'online';
         try {
-            const res = await fetch('http://localhost:5000/api/workers/availability', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/workers/availability`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

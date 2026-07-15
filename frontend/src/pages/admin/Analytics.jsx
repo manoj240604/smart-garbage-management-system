@@ -9,7 +9,7 @@ const AdminAnalytics = () => {
 
     const fetchStats = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/pickup-requests/stats/dashboard', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/stats/dashboard`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -24,7 +24,7 @@ const AdminAnalytics = () => {
     useEffect(() => {
         fetchStats();
 
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_API_URL);
 
         socket.on('requestUpdate', () => {
             fetchStats();

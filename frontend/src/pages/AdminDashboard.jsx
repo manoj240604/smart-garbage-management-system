@@ -14,7 +14,7 @@ const AdminDashboard = () => {
         const fetchData = async () => {
             try {
                 const token = user.token;
-                const areaRes = await fetch('http://localhost:5000/api/areas', {
+                const areaRes = await fetch(`${import.meta.env.VITE_API_URL}/api/areas`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 const areasData = await areaRes.json();
@@ -26,7 +26,7 @@ const AdminDashboard = () => {
                 // We'll iterate areas to get bins for visualization
                 let allBins = [];
                 for (const area of areasData) {
-                    const binRes = await fetch(`http://localhost:5000/api/areas/${area._id}/bins`, {
+                    const binRes = await fetch(`${import.meta.env.VITE_API_URL}/api/areas/${area._id}/bins`, {
                         headers: { Authorization: `Bearer ${token}` }
                     });
                     const binsData = await binRes.json();
@@ -42,7 +42,7 @@ const AdminDashboard = () => {
         if (user) fetchData();
 
         // Socket.io
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_API_URL);
 
         socket.on('binUpdate', (updatedBin) => {
             setBins(prevBins => prevBins.map(b => b._id === updatedBin._id ? updatedBin : b));

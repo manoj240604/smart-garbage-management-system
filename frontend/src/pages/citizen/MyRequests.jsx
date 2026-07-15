@@ -13,7 +13,7 @@ const MyRequests = () => {
     useEffect(() => {
         fetchRequests();
 
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_API_URL);
 
         socket.on('requestUpdate', (updatedRequest) => {
             setRequests(prevRequests => {
@@ -53,7 +53,7 @@ const MyRequests = () => {
 
     const fetchRequests = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/pickup-requests/my-requests', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/my-requests`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();

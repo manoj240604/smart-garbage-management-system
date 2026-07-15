@@ -22,7 +22,7 @@ const TrackStatus = () => {
     useEffect(() => {
         fetchRequestDetails();
 
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_API_URL);
 
         socket.on('requestUpdate', (updatedRequest) => {
             if (updatedRequest._id === id) {
@@ -38,7 +38,7 @@ const TrackStatus = () => {
 
     const fetchRequestDetails = async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/pickup-requests/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/${id}`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -52,7 +52,7 @@ const TrackStatus = () => {
 
     const handleRate = async (stars) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/pickup-requests/${id}/rate`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/${id}/rate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -21,7 +21,7 @@ const ProblemsTable = ({ user, workers, onlineWorkerIds }) => {
     useEffect(() => {
         fetchProblems();
 
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_API_URL);
 
         socket.on('newProblem', (newProblem) => {
             setProblems(prev => [newProblem, ...prev]);
@@ -40,7 +40,7 @@ const ProblemsTable = ({ user, workers, onlineWorkerIds }) => {
 
     const fetchProblems = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/problems', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/problems`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -55,7 +55,7 @@ const ProblemsTable = ({ user, workers, onlineWorkerIds }) => {
     const handleSchedule = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch(`http://localhost:5000/api/problems/${selectedProblem._id}/schedule`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/problems/${selectedProblem._id}/schedule`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -210,7 +210,7 @@ const ProblemsTable = ({ user, workers, onlineWorkerIds }) => {
                                     <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Photo Evidence</p>
                                     <div className="rounded-[32px] border-4 border-gray-50 p-2 bg-white shadow-xl overflow-hidden group">
                                         <img
-                                            src={`http://localhost:5000${selectedProblem.photo}`}
+                                            src={`${import.meta.env.VITE_API_URL}${selectedProblem.photo}`}
                                             alt="Problem Evidence"
                                             className="w-full h-auto rounded-[24px] shadow-inner group-hover:scale-[1.02] transition-all duration-1000 ease-out"
                                         />
@@ -323,7 +323,7 @@ const ComplaintsTable = ({ user }) => {
     useEffect(() => {
         fetchComplaints();
 
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_API_URL);
 
         socket.on('complaintUpdate', (updatedComplaint) => {
             setComplaints(prevComplaints => {
@@ -348,7 +348,7 @@ const ComplaintsTable = ({ user }) => {
 
     const fetchComplaints = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/complaints', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/complaints`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -362,7 +362,7 @@ const ComplaintsTable = ({ user }) => {
 
     const resolveComplaint = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/complaints/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/complaints/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -379,7 +379,7 @@ const ComplaintsTable = ({ user }) => {
     const handleReschedule = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch(`http://localhost:5000/api/complaints/${selectedComplaint._id}/reschedule`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/complaints/${selectedComplaint._id}/reschedule`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -562,7 +562,7 @@ const ComplaintsTable = ({ user }) => {
                                     <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Complaint Photo</p>
                                     <div className="rounded-[32px] border-4 border-gray-50 p-2 bg-white shadow-xl overflow-hidden group">
                                         <img
-                                            src={`http://localhost:5000${selectedComplaint.imageUrl}`}
+                                            src={`${import.meta.env.VITE_API_URL}${selectedComplaint.imageUrl}`}
                                             alt="Tactical Evidence"
                                             className="w-full h-auto rounded-[24px] shadow-inner group-hover:scale-[1.02] transition-all duration-1000 ease-out"
                                         />
@@ -665,7 +665,7 @@ const AdminDashboard = () => {
             fetchDashboardData();
         }
 
-        const socket = io('http://localhost:5000');
+        const socket = io(import.meta.env.VITE_API_URL);
         if (user?._id) {
             socket.emit('joinPresence', user._id, user.role);
         }
@@ -709,7 +709,7 @@ const AdminDashboard = () => {
                 });
 
                 // Refresh stats live
-                fetch('http://localhost:5000/api/pickup-requests/stats/dashboard', {
+                fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/stats/dashboard`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 })
                     .then(res => res.json())
@@ -717,7 +717,7 @@ const AdminDashboard = () => {
                     .catch(err => console.error('Error updating stats:', err));
             } else {
                 // Still update counts even if not on dashboard tab
-                fetch('http://localhost:5000/api/pickup-requests/stats/dashboard', {
+                fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/stats/dashboard`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 })
                     .then(res => res.json())
@@ -728,7 +728,7 @@ const AdminDashboard = () => {
 
         socket.on('analyticsUpdate', () => {
             // New centralized event to refresh all counters
-            fetch('http://localhost:5000/api/pickup-requests/stats/dashboard', {
+            fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/stats/dashboard`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             })
                 .then(res => res.json())
@@ -750,13 +750,13 @@ const AdminDashboard = () => {
         try {
             setLoading(true);
             const [statsRes, requestsRes, workersRes] = await Promise.all([
-                fetch('http://localhost:5000/api/pickup-requests/stats/dashboard', {
+                fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/stats/dashboard`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                fetch(`http://localhost:5000/api/pickup-requests?status=${filter.status}&area=${filter.area}`, {
+                fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests?status=${filter.status}&area=${filter.area}`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 }),
-                fetch('http://localhost:5000/api/workers', {
+                fetch(`${import.meta.env.VITE_API_URL}/api/workers`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 })
             ]);
@@ -777,7 +777,7 @@ const AdminDashboard = () => {
 
     const handleAssignWorker = async (requestId, workerId) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/pickup-requests/${requestId}/assign`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/pickup-requests/${requestId}/assign`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

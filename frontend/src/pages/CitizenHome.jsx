@@ -11,7 +11,7 @@ const CitizenHome = () => {
     useEffect(() => {
         const fetchAreas = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/areas', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/areas`, {
                     headers: { Authorization: `Bearer ${user.token}` }
                 });
                 const data = await res.json();
@@ -27,7 +27,7 @@ const CitizenHome = () => {
     const submitComplaint = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:5000/api/complaints', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/complaints`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -28,7 +28,7 @@ const ReportProblem = () => {
 
     const fetchAreas = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/areas', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/areas`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const data = await res.json();
@@ -76,7 +76,7 @@ const ReportProblem = () => {
                 data.append('photo', formData.photo);
             }
 
-            const res = await fetch('http://localhost:5000/api/problems', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/problems`, {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${user.token}` },
                 body: data
