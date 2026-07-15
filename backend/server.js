@@ -22,7 +22,12 @@ const app = express();
 const server = http.createServer(app);
 
 // Middleware
-app.use(cors());
+app.use(
+    cors({
+        origin: process.env.FRONTEND_URL || "*",
+        credentials: true
+    })
+);
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
@@ -40,8 +45,9 @@ app.use('/api/otp', require('./routes/otp.routes'));
 // Socket.io Setup
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:5173", // Frontend URL
-        methods: ["GET", "POST"]
+        origin: process.env.FRONTEND_URL || "*",
+        methods: ["GET", "POST"],
+        credentials: true
     }
 });
 
