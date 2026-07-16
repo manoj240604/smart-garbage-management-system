@@ -19,7 +19,7 @@ const LandingPage = () => {
             action: () => navigate('/citizen/my-requests')
         },
         {
-            title: 'Report the  Problems',
+            title: 'Report  Problems only',
             desc: 'Take a photo of garbage or dumping and we will handle the rest.',
             icon: '📸',
             color: 'from-emerald-400 to-teal-500',
