@@ -20,7 +20,7 @@ const LandingPage = () => {
         },
         {
             title: 'Report  Problems only',
-            desc: 'Take a photo of garbage or dumping and we will handle the rest.',
+            desc: 'Take a photo of garbage we will handle the rest.',
             icon: '📸',
             color: 'from-emerald-400 to-teal-500',
             action: () => navigate('/citizen/raise-complaint')
